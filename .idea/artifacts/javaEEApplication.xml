@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact name="javaEEApplication">
+    <output-path>$PROJECT_DIR$/out/artifacts/javaEEApplication</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="main/javaeeApplication/javaEEApplication" />
+      <element id="artifact" artifact-name="jumptojava:웹 exploded" />
+    </root>
+  </artifact>
+</component>

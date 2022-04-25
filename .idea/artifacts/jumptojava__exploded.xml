@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="jumptojava:웹 exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/jumptojava__exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="jumptojava/web/웹" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="jumptojava" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

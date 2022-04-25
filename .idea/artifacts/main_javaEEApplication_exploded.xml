@@ -2,7 +2,8 @@
   <artifact type="exploded-ear" name="main:javaEEApplication exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/main_javaEEApplication_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="main/javaeeApplication/javaEEApplication" />
+      <element id="artifact" artifact-name="javaEEApplication" />
+      <element id="javaee-facet-resources" facet="jumptojava/javaeeApplication/javaEEApplication" />
     </root>
   </artifact>
 </component>

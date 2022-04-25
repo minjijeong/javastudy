@@ -3,6 +3,8 @@ package com.programmers;
 import java.util.Arrays;
 
 /**
+ * https://programmers.co.kr/learn/courses/30/lessons/12987
+ *
  * xx 회사의 2xN명의 사원들은 N명씩 두 팀으로 나눠 숫자 게임을 하려고 합니다.
  * 두 개의 팀을 각각 A팀과 B팀이라고 하겠습니다. 숫자 게임의 규칙은 다음과 같습니다.
  *

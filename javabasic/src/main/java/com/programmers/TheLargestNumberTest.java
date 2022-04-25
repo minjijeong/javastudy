@@ -2,7 +2,6 @@ package com.programmers;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import org.springframework.util.StringUtils;
 
 /**
  * https://programmers.co.kr/learn/courses/30/lessons/42746
@@ -17,7 +16,7 @@ import org.springframework.util.StringUtils;
  * - numbers의 원소는 0 이상 1,000 이하입니다.
  * - 정답이 너무 클 수 있으니 문자열로 바꾸어 return 합니다.
  */
-public class TheLargestNumber {
+public class TheLargestNumberTest {
     public static String solution(int[] numbers) {
         String answer = "";
         String[] str = new String[numbers.length];
@@ -39,7 +38,12 @@ public class TheLargestNumber {
             return "0";
         }
 
-        return String.join("", str);
+        // Sort된 문자열 합치기
+        for(String s : str){
+            answer += s;
+        }
+
+        return answer;
     }
 
 

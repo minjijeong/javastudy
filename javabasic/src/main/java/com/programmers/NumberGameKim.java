@@ -28,26 +28,35 @@ import java.util.Arrays;
  * A와 B의 길이는 1 이상 100,000 이하입니다.
  * A와 B의 각 원소는 1 이상 1,000,000,000 이하의 자연수입니다.
  */
-public class NumberGame {
+public class NumberGameKim {
     public static int solution(int[] A, int[] B) {
-        int answer = 0;
-        Arrays.sort(B);
         Arrays.sort(A);
-        int startIdx = 0;
-        int curAIdx = 0;
-        while(startIdx < B.length){
-            if(curAIdx == A.length){
-                continue;
-            }
-            for(int i=curAIdx; i<A.length; i++){
-                if(B[startIdx] > A[i]){
-                    answer++;
-                    curAIdx = i+1;
+        Arrays.sort(B);
+        int answer = 0;
+        int idx = 0;
+        for(int i=0; i< A.length; i++){
+
+            if(A[i] < B[idx]){
+                answer += 1;
+            }else{
+                while(idx <B.length && A[i] >= B[idx])
+                    idx+=1;
+
+                if(idx == B.length){
                     break;
+                }else if(A[i] < B[idx]){
+                    answer += 1;
                 }
             }
-            startIdx++;
+
+            if(idx < B.length-1){
+                idx += 1;
+            }else
+                break;
+
         }
+
+
         return answer;
     }
 

@@ -1,8 +1,7 @@
 package com.programmers;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import org.springframework.util.StringUtils;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * https://programmers.co.kr/learn/courses/30/lessons/42746
@@ -17,29 +16,18 @@ import org.springframework.util.StringUtils;
  * - numbers의 원소는 0 이상 1,000 이하입니다.
  * - 정답이 너무 클 수 있으니 문자열로 바꾸어 return 합니다.
  */
-public class TheLargestNumber {
+public class TheLargestNumberTeacher {
     public static String solution(int[] numbers) {
-        String answer = "";
-        String[] str = new String[numbers.length];
+        // 숫자 -> 문자 -> 내림차순정렬 -> 조합
+        String answer = IntStream.of(numbers)
+                .mapToObj(String::valueOf)// = mapToObj(n -> String.valueOf(n))
+                .sorted((s1,s2) -> (s2+s1).compareTo(s1+s2))
+                .collect(Collectors.joining());
 
-        for(int i = 0;i < numbers.length; i++){
-            str[i] = String.valueOf(numbers[i]);
-        }
+        // 문자열 첫글자 확인의 권장된 방식으로 수정
+        if(answer.startsWith("0")) return "0";
 
-        Arrays.sort(str, new Comparator<String>() {
-            // 내림차순 정리
-            @Override
-            public int compare(String o1, String o2) {
-                return (o2+o1).compareTo(o1+o2);
-            }
-        });
-
-        // 0으로 시작하면 답은 0
-        if("0".equals(str[0])){
-            return "0";
-        }
-
-        return String.join("", str);
+        return answer;
     }
 
 

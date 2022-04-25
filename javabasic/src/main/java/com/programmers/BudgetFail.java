@@ -25,42 +25,24 @@ import java.util.Arrays;
  * 각 지방에서 요청하는 예산은 1 이상 100,000 이하인 자연수입니다.
  * 총 예산은 지방의 수 이상 1,000,000,000 이하인 자연수입니다.
  */
-public class Budget {
+public class BudgetFail {
     public static int solution(int[] budgets, int M) {
-        int answer = 0;
-        long sum = 0;
+        int answer = 0; // 상한액
+        int totLength = budgets.length;
+        int overAvgCnt = totLength;
+        int avg = M/ totLength; // 전체 평균
         Arrays.sort(budgets);
 
-        for(int b : budgets){
-            sum += b;
-        }
-        int n = budgets.length;
-        if(sum < M) {
-            answer = budgets[n - 1];
-        }else{
-            sum = 0;
-            int left = 0; // 수정
-            int right = budgets[n - 1];
-
-            while(left <= right){
-                int mid = (left + right) / 2;
-                sum = 0;
-                for(int i=0; i<n; i++){
-                    if(budgets[i] < mid) {
-                        sum += budgets[i];
-                    } else{
-                        sum += mid;
-                    }
-                }
-                if(sum > M){
-                    right = mid-1;
-                }
-                else{
-                    left = mid +1;
-                    answer = mid;
-                }
+        for(int budget : budgets){
+            if(budget <= avg){
+                M -= budget;
+                overAvgCnt--;
+            }
+            else {
+                break;
             }
         }
+        answer = M / overAvgCnt;
         return answer;
     }
 

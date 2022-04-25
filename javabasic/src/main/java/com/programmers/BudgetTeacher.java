@@ -1,6 +1,6 @@
 package com.programmers;
 
-import java.util.Arrays;
+import java.util.stream.IntStream;
 
 /**
  * https://www.acmicpc.net/problem/2512
@@ -25,42 +25,39 @@ import java.util.Arrays;
  * 각 지방에서 요청하는 예산은 1 이상 100,000 이하인 자연수입니다.
  * 총 예산은 지방의 수 이상 1,000,000,000 이하인 자연수입니다.
  */
-public class Budget {
+public class BudgetTeacher {
     public static int solution(int[] budgets, int M) {
         int answer = 0;
-        long sum = 0;
-        Arrays.sort(budgets);
 
+        int min = 0;
+        int max = IntStream.of(budgets).max().orElse(0); // Optional orElse로 값이 없으면 0으로 표현
+        /*
         for(int b : budgets){
-            sum += b;
+            if( b > max) max = b;
         }
-        int n = budgets.length;
-        if(sum < M) {
-            answer = budgets[n - 1];
-        }else{
-            sum = 0;
-            int left = 0; // 수정
-            int right = budgets[n - 1];
+         */
 
-            while(left <= right){
-                int mid = (left + right) / 2;
-                sum = 0;
-                for(int i=0; i<n; i++){
-                    if(budgets[i] < mid) {
-                        sum += budgets[i];
-                    } else{
-                        sum += mid;
-                    }
-                }
-                if(sum > M){
-                    right = mid-1;
-                }
-                else{
-                    left = mid +1;
-                    answer = mid;
-                }
+        while(min <= max){
+            // Stream을 사용할때, function 안에서 사용되는 변수는 가변변수를 사용하면 안되서 final로 변환
+            final int mid = (min + max) / 2; // 예산의 상한액으로 가정
+            long sum = IntStream.of(budgets)
+                    .map(b -> Math.min(b, mid))
+                    .sum();
+            /*
+            for(int b : budgets){
+                if(b> mid) sum += mid;
+                else sum += b;
+            }
+            */
+
+            if(sum <= M){
+                min = mid + 1;
+                answer = mid;
+            } else{
+              max = mid -1;
             }
         }
+
         return answer;
     }
 

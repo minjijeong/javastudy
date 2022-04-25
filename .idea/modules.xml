@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/jumptojava.iml" filepath="$PROJECT_DIR$/.idea/jumptojava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javabasic/src/main/main.iml" filepath="$PROJECT_DIR$/javabasic/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javabasic/src/test/test.iml" filepath="$PROJECT_DIR$/javabasic/src/test/test.iml" />
     </modules>
   </component>
 </project>

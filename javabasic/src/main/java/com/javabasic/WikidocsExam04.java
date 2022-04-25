@@ -1,5 +1,6 @@
 package com.javabasic;
 
+import com.sun.xml.internal.ws.util.StringUtils;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -7,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import org.apache.logging.log4j.util.Strings;
+
 
 public class WikidocsExam04 {
     public static void main(String[] args) {
@@ -65,7 +66,7 @@ public class WikidocsExam04 {
             br = new BufferedReader(new FileReader("sample.txt"));
             while (true) {
                 String line = br.readLine();
-                if (!Strings.isNotEmpty(line)){
+                if ("".equals(line) || line.isEmpty()){
                     break;
                 }
                 System.out.println(line);  // null 이 출력된다.
@@ -86,7 +87,9 @@ public class WikidocsExam04 {
             ArrayList<String> contents = new ArrayList<>();
             while (true) {
                 String line = br.readLine();
-                if (!Strings.isNotEmpty(line)){
+
+
+                if ("".equals(line) || line.isEmpty()){
                     break;
                 }
                 contents.add(line+"\n");

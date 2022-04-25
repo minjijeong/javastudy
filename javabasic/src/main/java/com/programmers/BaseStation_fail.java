@@ -52,8 +52,7 @@ class BaseStation_fail {
             for (int i = idx + w; i >= idx - w; i--) {
                 System.out.println(" i : "+i);
                 if (i >= n || i == curIdx) {
-                    continue;
-                } else if (i <= 0) {
+                }else if (i <= 0) {
                     break;
                 } else {
                     if(arr[i] == 0) {

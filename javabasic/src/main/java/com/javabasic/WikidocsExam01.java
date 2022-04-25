@@ -1,6 +1,5 @@
-package test.java;
+package com.javabasic;
 
-import com.sun.deploy.util.StringUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -88,7 +87,7 @@ public class WikidocsExam01 {
         Americano,
         IceAmericano,
         CafeLatte
-    };
+    }
     static void printCoffeePrice(CoffeType type) {
         HashMap<CoffeType, Integer> priceMap = new HashMap<>();
         priceMap.put(CoffeType.Americano, 3000);  // 1: 아메리카노
@@ -96,6 +95,6 @@ public class WikidocsExam01 {
         priceMap.put(CoffeType.CafeLatte, 5000);  // 3: 카페라떼
 
         int price = priceMap.get(type);
-        System.out.println(String.format("가격은 %d원 입니다.", price));
+        System.out.printf("가격은 %d원 입니다. \n", price);
     }
 }

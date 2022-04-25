@@ -29,10 +29,7 @@ public class Calculator {
 
     boolean isOdd(){
         // 홀수이면 true, 짝수이면 false
-        if(this.value % 2 == 0){
-            return false;
-        }
-        return true;
+        return this.value % 2 != 0;
     }
 
     int avg(ArrayList<Integer> arr){

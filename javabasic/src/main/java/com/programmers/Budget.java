@@ -45,10 +45,10 @@ public class Budget {
             while(left <= right){
                 int mid = (left + right) / 2;
                 sum = 0;
-                for(int i=0; i<n; i++){
-                    if(budgets[i] < mid) {
-                        sum += budgets[i];
-                    } else{
+                for (int budget : budgets) {
+                    if (budget < mid) {
+                        sum += budget;
+                    } else {
                         sum += mid;
                     }
                 }

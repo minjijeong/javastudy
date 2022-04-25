@@ -20,7 +20,7 @@ public class WikidocsExam03{
         System.out.println(cal2.getValue());  // 100 출력
 
         // 03. 홀수인지 짝수인지 판별해 주는 메서드(isOdd)를 추가
-        Boolean isOdd = cal2.isOdd();
+        boolean isOdd = cal2.isOdd();
         System.out.println(" 홀수 true, 짝수 false => "+ cal2.getValue() + " : " + isOdd);
 
         // 04. 정수 배열 또는 정수의 리스트 입력시 그 평균값을 구해 정수로 리턴하는 avg 메서드를 추가

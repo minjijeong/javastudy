@@ -2,7 +2,6 @@ package com.programmers;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import org.springframework.util.StringUtils;
 
 /**
  * https://programmers.co.kr/learn/courses/30/lessons/42746

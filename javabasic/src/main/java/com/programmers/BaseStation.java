@@ -11,7 +11,7 @@ class BaseStation {
     public static int solution(int n, int[] stations, int w) {
         int answer = 0; // 기지국 수
 
-        Queue<Integer> sq = new LinkedList<Integer>();
+        Queue<Integer> sq = new LinkedList<>();
         for(int s : stations){
             sq.offer(s); // 현재 기지국이 설치된 아파트 추가
         }

@@ -1,4 +1,4 @@
-package test.java;
+package com.javabasic;
 
 public class WikidocsExam02 {
     /**

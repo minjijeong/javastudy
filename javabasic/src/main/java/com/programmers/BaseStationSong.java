@@ -19,8 +19,8 @@ public class BaseStationSong {
             }
         }
 
-        for(int i = 0; i<floats.length; i++){
-            System.out.println(floats[i]);
+        for (float aFloat : floats) {
+            System.out.println(aFloat);
         }
         int[] idxArr = new int [numbers.length];
         for(int i = 0; i<numbers.length; i++){
@@ -47,8 +47,8 @@ public class BaseStationSong {
             }
         }
 
-        for(int i = 0; i<floats.length; i++){
-            answer += (int)floats[i];
+        for (float aFloat : floats) {
+            answer += (int) aFloat;
         }
 
         return answer += 0;

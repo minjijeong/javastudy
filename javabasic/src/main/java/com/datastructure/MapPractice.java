@@ -1,11 +1,15 @@
 package com.datastructure;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 public class MapPractice {
     public static class MyData{
@@ -37,31 +41,135 @@ public class MapPractice {
 
     public static void main(String[] args) {
 //        mapConception();
-        getPcketMon();
+//        getPcketMon();
+//        getUnfinishedMan();
+        getCustoms();
+    }
+
+    private static void getCustoms() {
+        String[][] clothes  = {{"yellowhat", "headgear"},{"bluesunglasses", "eyewear"},{"green_turban", "headgear"}};
+        int result = solution03(clothes);
+        System.out.println(result);
+    }
+
+    private static int solution03(String[][] clothes) {
+        // 위장용품 종류별 개수
+        // 각 개수의 +1 을 모두 곱한다.
+        // -1 해서 리턴한다.
+        int answer = 1;
+        Map<String, List<String>> map = new HashMap<>();
+        for(String[] clothe : clothes) {
+            if (map.get(clothe[1]) != null) {
+                map.get(clothe[1]).add(clothe[0]);
+            } else {
+                List<String> clotheList = new ArrayList<>();
+                clotheList.add(clothe[0]);
+                map.put(clothe[1], clotheList);
+            }
+        }
+
+//        Set<String> keys = map.keySet();
+//        for (String key : keys) {
+        for(String key : map.keySet()){
+            answer *= map.get(key).size() + 1;
+        }
+        return answer - 1;
+    }
+
+    private static int solution03_1(String[][] clothes){
+        Map<String, Integer> map = new HashMap<>();
+
+        // 위장 용품의 종류별 개수를 구한다.
+        for(String[] clothe : clothes){
+            String type = clothe[1];
+            map.put(type, map.getOrDefault(type,0)+1);
+        }
+
+        // 각 개수의 +1을 모두 곱한다. (= 선택 안하는 경우의 수 추가)
+        int answer = 1;
+        Iterator<Integer> iter = map.values().iterator();
+        while(iter.hasNext()){
+            answer *= iter.next() + 1;
+        }
+
+        // 모두 선택안하는 경우의 1개를 뺀다.
+        return answer -1;
+    }
+
+    private static void getUnfinishedMan() {
+        String[] participant = {"mislav", "stanko", "mislav", "ana"};
+        String[] completion = {"stanko", "ana", "mislav"};
+        String result = solution02(participant, completion);
+        System.out.println(result);
+    }
+
+    /**
+     * O(n) = O(n) * 2 + O(1)
+     */
+    private static String solution02(String[] participant, String[] completion) {
+        String answer = "";
+        Map<String,Integer> unFinshed = new HashMap<>();
+
+        for(String person : participant){
+            unFinshed.put(person, unFinshed.getOrDefault(person, 0) + 1);
+//            if(unFinshed.get(person) != null){
+//                unFinshed.replace(person, unFinshed.get(person), unFinshed.get(person) + 1);
+//            }
+//            else {
+//                unFinshed.put(person, 1);
+//            }
+        }
+        for(String person : completion){
+            int nums = unFinshed.get(person) - 1;
+            if(nums == 0){
+                unFinshed.remove(person);
+            }
+            else {
+                unFinshed.put(person, nums);
+            }
+
+        }
+        answer = unFinshed.keySet().iterator().next();
+//        if(unFinshed.size() > 0 ){
+//            String[] str = unFinshed.keySet().toArray(new String[0]);
+//            answer = str[0];
+//        }
+        return answer;
+    }
+
+    private static String solution02_1(String[] participant, String[] completion){
+        Arrays.sort(participant);
+        Arrays.sort(completion);
+
+        String name = "";
+        for(int i=0; i < participant.length; i++){
+            if(!participant[i].equals(completion[i])){
+                name = participant[i];
+                break;
+            }
+        }
+
+        return name;
     }
 
     private static void getPcketMon() {
+//        int[] pcketMons = {3,3,3,2,2,4};
         int[] pcketMons = {3,1,2,3};
         int result = solution01(pcketMons);
         System.out.println(result);
     }
 
     static int solution01(int[] nums){
-        int answer = 0;
-        int idx = 0;
+        int answer = nums.length /2;
         Map<Integer, Integer> map = new HashMap<>();
         for(int i=0; i < nums.length; i++){
-            idx = i + 1;
-            for(int j=idx; j < nums.length; j++){
-                if((map.getOrDefault(nums[i], -1) != nums[j] )&& (map.getOrDefault(nums[j], -1) != nums[i])){
-                    if(nums[i] != nums[j]) {
-                        map.put(nums[i], nums[j]);
-                    }
-                }
-            }
+            map.put(nums[i],1);
         }
-        answer = map.size();
-        return answer;
+//        if(answer > map.size()){
+//            answer = map.size();
+//        }
+
+        return Math.min(answer, map.size());
     }
 
     private static void mapConception() {

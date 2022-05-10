@@ -5,6 +5,10 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
+/**
+ * 깊이 우선 탐색
+ * 실패...
+ */
 public class RightBracketCount {
     static int answer = 0;
     public static int solution(int n) {

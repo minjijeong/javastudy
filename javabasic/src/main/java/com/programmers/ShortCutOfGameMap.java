@@ -29,6 +29,13 @@ public class ShortCutOfGameMap {
         }
     }
 
+    /**
+     * 1. 네 방향으로 한 칸씩 이동한다.
+     * 2. 이동한 후에는 현재값보다 1 큰 값을 채운다.
+     * 3. 벽, 미로 밖, 왔던길 못간다.
+     *
+     * BFS - Queue에 케이스를 담고, 다 소진할때까지 루프도는 것
+     */
     public static int solution(int[][] maps) {
         int mapSizeX = maps.length;
         int mapSizeY = maps[0].length;
@@ -39,6 +46,8 @@ public class ShortCutOfGameMap {
 
         Queue<Position> queue = new LinkedList<>();
         queue.add(new Position(new Location(0,0),1));
+        visited[0][0] = true;
+
         while(!queue.isEmpty()){
             Position now  = queue.poll();
 

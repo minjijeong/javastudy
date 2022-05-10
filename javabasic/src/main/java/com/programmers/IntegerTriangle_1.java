@@ -1,5 +1,8 @@
 package com.programmers;
 
+/**
+ * 실패....
+ */
 public class IntegerTriangle_1 {
     static int answer = 0;
     static int[][] table;

@@ -41,7 +41,7 @@ public class MapPractice {
 
     public static void main(String[] args) {
 //        mapConception();
-//        getPcketMon();
+//        getPocketMon();
 //        getUnfinishedMan();
         getCustoms();
     }
@@ -68,8 +68,6 @@ public class MapPractice {
             }
         }
 
-//        Set<String> keys = map.keySet();
-//        for (String key : keys) {
         for(String key : map.keySet()){
             answer *= map.get(key).size() + 1;
         }
@@ -79,18 +77,25 @@ public class MapPractice {
     private static int solution03_1(String[][] clothes){
         Map<String, Integer> map = new HashMap<>();
 
-        // 위장 용품의 종류별 개수를 구한다.
-        for(String[] clothe : clothes){
-            String type = clothe[1];
-            map.put(type, map.getOrDefault(type,0)+1);
-        }
+//        // 위장 용품의 종류별 개수를 구한다.
+//        for(String[] clothe : clothes){
+//            String type = clothe[1];
+//            map.put(type, map.getOrDefault(type,0)+1);
+//        }
+//
+//        // 각 개수의 +1을 모두 곱한다. (= 선택 안하는 경우의 수 추가)
+//        int answer = 1;
+//        Iterator<Integer> iter = map.values().iterator();
+//        while(iter.hasNext()){
+//            answer *= iter.next() + 1;
+//        }
 
-        // 각 개수의 +1을 모두 곱한다. (= 선택 안하는 경우의 수 추가)
-        int answer = 1;
-        Iterator<Integer> iter = map.values().iterator();
-        while(iter.hasNext()){
-            answer *= iter.next() + 1;
-        }
+        int answer = Arrays.stream(clothes)
+                .map(c -> c[1]) // 1번 인덱스 종류만 꺼내고
+                .distinct() // 중복없이
+                .map(type -> (int) Arrays.stream(clothes).filter(c -> c[1].equals(type)).count())// 타입별 count 구하고
+                .map(c -> c+1) // 선택안하는 케이스 추가
+                .reduce(1, (c,n) -> c*n); // 누적해서 곱한 값 구하기
 
         // 모두 선택안하는 경우의 1개를 뺀다.
         return answer -1;
@@ -107,31 +112,31 @@ public class MapPractice {
      * O(n) = O(n) * 2 + O(1)
      */
     private static String solution02(String[] participant, String[] completion) {
-        String answer = "";
-        Map<String,Integer> unFinshed = new HashMap<>();
+        String answer;
+        Map<String,Integer> unFinished = new HashMap<>();
 
         for(String person : participant){
-            unFinshed.put(person, unFinshed.getOrDefault(person, 0) + 1);
-//            if(unFinshed.get(person) != null){
-//                unFinshed.replace(person, unFinshed.get(person), unFinshed.get(person) + 1);
+            unFinished.put(person, unFinished.getOrDefault(person, 0) + 1);
+//            if(unFinished.get(person) != null){
+//                unFinished.replace(person, unFinished.get(person), unFinished.get(person) + 1);
 //            }
 //            else {
-//                unFinshed.put(person, 1);
+//                unFinished.put(person, 1);
 //            }
         }
         for(String person : completion){
-            int nums = unFinshed.get(person) - 1;
+            int nums = unFinished.get(person) - 1;
             if(nums == 0){
-                unFinshed.remove(person);
+                unFinished.remove(person);
             }
             else {
-                unFinshed.put(person, nums);
+                unFinished.put(person, nums);
             }
 
         }
-        answer = unFinshed.keySet().iterator().next();
-//        if(unFinshed.size() > 0 ){
-//            String[] str = unFinshed.keySet().toArray(new String[0]);
+        answer = unFinished.keySet().iterator().next();
+//        if(unFinished.size() > 0 ){
+//            String[] str = unFinished.keySet().toArray(new String[0]);
 //            answer = str[0];
 //        }
         return answer;
@@ -152,7 +157,7 @@ public class MapPractice {
         return name;
     }
 
-    private static void getPcketMon() {
+    private static void getPocketMon() {
 //        int[] pcketMons = {3,3,3,2,2,4};
         int[] pcketMons = {3,1,2,3};
         int result = solution01(pcketMons);
@@ -162,8 +167,8 @@ public class MapPractice {
     static int solution01(int[] nums){
         int answer = nums.length /2;
         Map<Integer, Integer> map = new HashMap<>();
-        for(int i=0; i < nums.length; i++){
-            map.put(nums[i],1);
+        for (int num : nums) {
+            map.put(num, 1);
         }
 //        if(answer > map.size()){
 //            answer = map.size();

@@ -1,10 +1,13 @@
 package com.datastructure;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Queue;
 import java.util.Random;
+import sun.awt.image.ImageWatched.Link;
 
 /**
  * [Sort 종류]
@@ -35,7 +38,129 @@ import java.util.Random;
  */
 public class SortPractice {
     public static void main(String[] args) {
-        SortConception();
+//        SortConception();
+//        removeTheLeastNumber();
+//        customOrderStrings();
+//        jadenCaseString();
+        hIndex();
+    }
+
+    private static void hIndex() {
+        int[] citations= {3, 0, 6, 1, 5};
+
+        // 기대값 3
+        System.out.println(solution04(citations));
+    }
+
+    private static int solution04(int[] citations) {
+        // n편중 h번 이상 인용된 논문이 h편 이상이고 나머지 논문이 h번 이하 인용되었다면, h의 최대값
+        //[10,100] -> 2
+        //[6,6,6,6,6,6] -> 6
+        //[2,2,2] -> 2
+        //[3, 0, 6, 1, 5] -> 3
+        //[0,1,3,5,6]
+        int answer = 0;
+        Arrays.sort(citations);
+        int size = citations.length;
+//        int idx = (int)Math.ceil(citations.length/2);
+        Queue<Integer> guess = new LinkedList<>();
+        for(int j=0; j<size;j++) guess.add(citations[j]);
+
+        System.out.println(guess.peek());
+        // size 보다 모두 크거나 같다면 사이즈 = h
+        if(size <= guess.peek()){
+            answer = size;
+        }
+
+        int minDiff = 0;
+        int idx = 0;
+        while (!guess.isEmpty()){
+            int lessRefCnt = 0; // h번 이하 논문수
+            int greatRefCnt = 0; // h번 이상 논문수
+            int current = guess.poll();
+            // for문으로 다음 항이 현재 항보다 큰 개수가 현재항보다 많다면 h
+            for(int i=idx+1;i <citations.length;i++){
+                if(citations[i] < current){
+                    lessRefCnt++;
+                }else if(citations[i] > current){
+                    greatRefCnt++;
+                }else{
+                    lessRefCnt++;
+                    greatRefCnt++;
+                }
+            }
+            minDiff = Math.min(minDiff, greatRefCnt-lessRefCnt);
+            if(minDiff == 0){
+                answer = Math.min(answer, greatRefCnt);
+            }
+//            answer =
+            idx++;
+        }
+        System.out.println(minDiff);
+        return answer;
+    }
+
+    private static void jadenCaseString() {
+        String s = "3people unFollowed me";
+        // 기대값 "3people Unfollowed Me"
+        System.out.println(solution03(s));
+    }
+    public static String solution03(String s) {
+        // 모든 단어의 첫 문자가 대문자이고 - index 0 이거나 or space 뒤에 오는 문자는 대문자 치환
+        // 단, 첫 문자가 알파벳이 아닐 때에는 이어지는 알파벳은 소문자로 쓰면 됩니다.
+        // 그 외의 알파벳은 소문자인 문자열
+        StringBuffer buffer = new StringBuffer();
+        int chkBefore = 32;
+        for(char c : s.toLowerCase().toCharArray()){
+            // 32 : 공백 , 65 : A, 122 : z
+            if(chkBefore == 32 && c >= 65 && c <= 122){
+                c -= 32;
+            }
+
+            chkBefore = c;
+            buffer.append(c);
+        }
+        return buffer.toString();
+    }
+
+    private static void customOrderStrings() {
+//        String[] strings = {"sun", "bed", "car"};
+        String[] strings = {"abce", "abcd", "cdx"};
+//        int n = 1;
+        int n = 2;
+        System.out.println(Arrays.toString(solution02(strings,n)));
+    }
+
+    public static String[] solution02(String[] strings, int n) {
+        return Arrays.stream(strings).sorted(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                char str1 = o1.charAt(n);
+                char str2 = o2.charAt(n);
+                if(str1 == str2){
+                    return o1.compareTo(o2);
+                }
+                return str1 - str2;
+            }
+        }).toArray(String[]::new);
+    }
+
+    private static void removeTheLeastNumber() {
+        int[] arr = {4,3,2,1};
+        // 기대값 4,3,2
+        System.out.println(solution01(arr));
+    }
+
+    public static int[] solution01(int[] arr) {
+        int[] answer = {-1};
+        if(arr.length == 1) return answer;
+
+        int min = Arrays.stream(arr).sorted().toArray()[0];
+        List<Integer> list = new LinkedList<>();
+        for(int i=0; i<arr.length;i++){
+            if(arr[i] != min) list.add(arr[i]);
+        }
+        return list.stream().mapToInt(Integer::intValue).toArray();
     }
 
     static class MyData implements Comparable<MyData>{

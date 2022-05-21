@@ -10,7 +10,8 @@ public class Virus {
         int columns = 4;
         int max_virus = 2;
         int[][] queries = {{3,2},{3,2},{2,2},{3,2},{1,4},{3,2},{2,3},{3,1}};
-        int[][] result = solution(rows,columns,max_virus, queries);
+//        int[][] result = solution(rows,columns,max_virus, queries);
+        int[][] result = solution01(rows, columns, max_virus,queries);
         int[][] test = new int[rows][columns];
         for(int i=0; i<queries.length;i++) {
             int[] tmp = queries[i];
@@ -22,6 +23,11 @@ public class Virus {
         printMap(result);
 
     }
+
+    static boolean[][] visited;
+    static int[] dr = {-1,1,0,0};
+    static int[] dc = {0,0,-1,1};
+    static int[][] answer;
 
     private static int[][] solution(int rows, int columns, int max_virus, int[][] queries) {
         int[][] answer = new int[rows][columns];
@@ -85,5 +91,43 @@ public class Virus {
         System.out.println("==================");
         for(int i=0;i<map.length;i++) System.out.println(Arrays.toString(map[i]));
         System.out.println("==================");
+        System.out.println(Arrays.deepToString(map));
     }
+
+    public static int[][] solution01(int rows, int columns, int max_virus, int[][] queries) {
+        answer = new int[rows][columns];
+
+        for(int i = 0; i < queries.length; i++){
+            int r = queries[i][0];
+            int c = queries[i][1];
+            visited = new boolean[rows][columns];
+
+            DFS(r-1, c-1, max_virus);
+
+        }
+
+        return answer;
+    }
+
+    private static void DFS(int r, int c, int max){
+        if(answer[r][c] < max) answer[r][c]++;
+        else if(answer[r][c] == max){
+            visited[r][c] = true;
+            for(int i = 0; i < 4; i++){
+                int nr = r + dr[i];
+                int nc = c + dc[i];
+
+                if(nr < 0 || nr >= visited.length || nc < 0 || nc >= visited[0].length) continue;
+                if(visited[nr][nc]) continue;
+
+                visited[nr][nc] = true;
+
+                if(answer[nr][nc] >= max - 1) DFS(nr, nc, max);
+                else answer[nr][nc]++;
+
+
+            }
+        }
+    }
+
 }

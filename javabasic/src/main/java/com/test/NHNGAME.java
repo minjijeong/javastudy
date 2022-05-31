@@ -188,9 +188,9 @@ public class NHNGAME {
                 queue.offer(moved);
             }
         }
-
+        return null;
         // 최소 이동 격자 = 5
-        return answer;
+//        return answer;
     }
 
     private static void test04() {

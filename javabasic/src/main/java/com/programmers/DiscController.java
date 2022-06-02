@@ -1,30 +1,21 @@
 package com.programmers;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 public class DiscController {
     public static void main(String[] args) {
-        int[][] jobs = {{0, 3}, {1, 9}, {2, 6}};
+        int[][] jobs = {{0, 3}, {0, 3},{3, 2},{1, 9}, {2, 6},{0, 7},{1, 9}};
         int result = solution(jobs);
         System.out.println(result);
     }
     public static class Task{
-        int in;
-        int spend;
-        private Task task;
-
-        Task(int in, int spend){
-            this.in = in;
-            this.spend = spend;
+        int inTime;
+        int spendTime;
+        public Task(int inTime, int spendTime){
+            this.inTime = inTime;
+            this.spendTime = spendTime;
         }
 
         @Override
@@ -35,37 +26,43 @@ public class DiscController {
             if (o == null || getClass() != o.getClass()) {
                 return false;
             }
-            Task task1 = (Task) o;
-            return in == task1.in && spend == task1.spend && Objects.equals(task, task1.task);
+            Task task = (Task) o;
+            return inTime == task.inTime && spendTime == task.spendTime;
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(in, spend, task);
+            return Objects.hash(inTime, spendTime);
         }
     }
     public static int solution(int[][] jobs) {
         int answer = 0;
-        Arrays.sort(jobs, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                return o1[0]-o2[0];
+        int end = 0; // 수행되고난 직후의 시간
+        int jobsIdx = 0; // jobs 배열의 인덱스
+        int count =0; //수행된 요청 갯수
+
+        Arrays.sort(jobs, (o1,o2) -> o1[0] - o2[0]);
+        PriorityQueue<int[]> pq = new PriorityQueue<>( (o1, o2) -> o1[1] - o2[1]);
+
+        // 요청이 모두 수행될 때까지 반복
+        while(count < jobs.length){
+
+            // 하나의 작업이 오나료되는 시점(end)까지 들어온 모든 요청을 큐에 넣음
+            while(jobsIdx < jobs.length && jobs[jobsIdx][0] <= end){
+                pq.add(jobs[jobsIdx++]);
             }
-        });
-        PriorityQueue<int[]> queue = new PriorityQueue<>(((o1, o2) -> o1[1] - o2[1]));
-        for(int i=0;i< jobs.length;i++){
-            queue.offer(jobs[i]);
+
+            // 큐가 비어 있다면 작업 완료(end) 이후에 다시 요청이 들어온다는 의미
+            if(pq.isEmpty()){
+                end = jobs[jobsIdx][0];
+            }
+            else{ // 작업이 끝나기 전, 들어온 요청 중 가장 수행시간이 짧은 요청부터 수행
+                int[] temp = pq.poll();
+                answer += temp[1] + end - temp[0];
+                end += temp[1];
+                count++;
+            }
         }
-
-        int count = 0;
-        int loc = 0;
-        while(count >= jobs.length) {
-            // 넣고 난다음 것들 추가
-
-        }
-
-
-
-        return  answer;
+        return (int) Math.floor(answer/jobs.length);
     }
 }

@@ -46,8 +46,8 @@ public class SortPractice {
     }
 
     private static void hIndex() {
-        int[] citations= {3, 0, 6, 1, 5};
-
+//        int[] citations= {3, 0, 6, 1, 5};
+        int[] citations= {3, 0, 2, 1, 4};
         // 기대값 3
         System.out.println(solution04(citations));
     }
@@ -62,41 +62,16 @@ public class SortPractice {
         int answer = 0;
         Arrays.sort(citations);
         int size = citations.length;
-//        int idx = (int)Math.ceil(citations.length/2);
-        Queue<Integer> guess = new LinkedList<>();
-        for(int j=0; j<size;j++) guess.add(citations[j]);
-
-        System.out.println(guess.peek());
-        // size 보다 모두 크거나 같다면 사이즈 = h
-        if(size <= guess.peek()){
-            answer = size;
-        }
-
-        int minDiff = 0;
-        int idx = 0;
-        while (!guess.isEmpty()){
-            int lessRefCnt = 0; // h번 이하 논문수
-            int greatRefCnt = 0; // h번 이상 논문수
-            int current = guess.poll();
-            // for문으로 다음 항이 현재 항보다 큰 개수가 현재항보다 많다면 h
-            for(int i=idx+1;i <citations.length;i++){
-                if(citations[i] < current){
-                    lessRefCnt++;
-                }else if(citations[i] > current){
-                    greatRefCnt++;
-                }else{
-                    lessRefCnt++;
-                    greatRefCnt++;
-                }
+        for(int i=0; i<size ; i++){
+            // 사이즈, h번 응용 된거 비교
+            int smaller = Math.min(citations[i], size -i);
+            if(smaller >= answer){
+                answer = Math.max(answer, smaller);
             }
-            minDiff = Math.min(minDiff, greatRefCnt-lessRefCnt);
-            if(minDiff == 0){
-                answer = Math.min(answer, greatRefCnt);
+            else{
+                break;
             }
-//            answer =
-            idx++;
         }
-        System.out.println(minDiff);
         return answer;
     }
 

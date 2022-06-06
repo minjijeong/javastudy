@@ -4,7 +4,6 @@
 package com.datastructure.thinkdatastructure;
 
 import java.awt.Color;
-import org.apache.commons.math3.*;
 //import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -21,6 +20,10 @@ import org.jfree.ui.RefineryUtilities;
 
 /**
  * @author downey
+ *
+ * ** 특정 라이브러리를 가져오지 못해서 실행이 안됨.. 기존 프로젝트은 gradle, 현재는 maven 이것때문에 못가져오는것 같지는 않음
+ * 이부분 다시 한번더 팔로업
+ * org.apache.commons.math3.stat.regression.SimpleRegression
  *
  */
 public class Profiler extends ApplicationFrame {
@@ -109,8 +112,8 @@ public class Profiler extends ApplicationFrame {
 	 * @param series
 	 */
 	public void plotResults(XYSeries series) {
-		double slope = estimateSlope(series);
-		System.out.println("Estimated slope= " + slope);
+//		double slope = estimateSlope(series);
+//		System.out.println("Estimated slope= " + slope);
 
 		final XYSeriesCollection dataset = new XYSeriesCollection();
         dataset.addSeries(series);
@@ -147,13 +150,13 @@ public class Profiler extends ApplicationFrame {
 	 * @param series
 	 * @return
 	 */
-	public double estimateSlope(XYSeries series) {
-		SimpleRegression regression = new SimpleRegression();
-
-		for (Object item: series.getItems()) {
-			XYDataItem xy = (XYDataItem) item;
-			regression.addData(Math.log(xy.getXValue()), Math.log(xy.getYValue()));
-		}
-		return regression.getSlope();
-	}
+//	public double estimateSlope(XYSeries series) {
+//		SimpleRegression regression = new SimpleRegression();
+//
+//		for (Object item: series.getItems()) {
+//			XYDataItem xy = (XYDataItem) item;
+//			regression.addData(Math.log(xy.getXValue()), Math.log(xy.getYValue()));
+//		}
+//		return regression.getSlope();
+//	}
 }

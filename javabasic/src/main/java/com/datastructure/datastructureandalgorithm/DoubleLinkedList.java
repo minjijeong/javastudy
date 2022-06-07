@@ -8,6 +8,10 @@ public class DoubleLinkedList {
         public DLLNode(int data){
             this.data = data;
         }
+
+        public DLLNode(){
+            this.data = 0;
+        }
         public void setData(int data){
             this.data = data;
         }

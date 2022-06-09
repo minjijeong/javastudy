@@ -3,14 +3,14 @@ package com.datastructure.datastructureandalgorithm;
 /**
  * 3.10.1 연결리스트를 사용해서 스택을 구현해라.
  */
-public class Stack<T> {
+public class Stack {
     Node head;
     Node tail;
     class Node{
-        T data;
+        Integer data;
         Node next;
         Node prev;
-        Node(T data){
+        Node(Integer data){
             this.data = data;
         }
     }
@@ -28,13 +28,13 @@ public class Stack<T> {
         return currentNode;
     }
 
-    public void push(T data){
+    public void push(Integer data){
         Node currentNode = new Node(data);
         tail.next = currentNode;
         currentNode.prev = tail;
     }
 
-    public T pop(){
+    public Integer pop(){
         Node currentNode = tail;
         currentNode.prev.next = null;
         tail = null;

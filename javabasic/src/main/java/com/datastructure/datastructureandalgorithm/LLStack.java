@@ -38,7 +38,7 @@ public class LLStack{
     /**
      * 스택 데이타 push를 헤드에 추가하는 형태로 구현
      */
-    public void Push(Integer data){
+    public void push(int data){
         if(head == null){
             head = new LLNode<Integer>(data);
         }else if(head.getData() == null){
@@ -49,6 +49,7 @@ public class LLStack{
             head = llNode;
         }
     }
+
     public Integer top(){
         if(head == null) return null;
         else return head.getData();

@@ -124,10 +124,18 @@ public class TvingTest {
      *         return answer;
      */
 
-//    private static void sol04() {
-//        String[] map = {"..FF", "###F", "###."};
-//        int k = 4;
-//        int result = solution04(map, k);
-//        System.out.println(result);
-//    }
+    private static void sol04() {
+        String sql = "\n"
+                + "SELECT gu.ID  AS \"USER_ID\"\n"
+                + "     , count(p.item)  AS \"PURCHASE_COUNT\"\n"
+                + "     , SUM(IFNULL(c.PRICE,0))  \"TOTAL_PRICE\"      \n"
+                + "  FROM GAME_USERS gu\n"
+                + "LEFT JOIN PURCHASES p \n"
+                + "ON (gu.ID = p.USER_ID)\n"
+                + "LEFT JOIN  CHARACTERS c\n"
+                + "ON (p.ITEM = c.NAME)\n"
+                + "WHERE 1=1\n"
+                + "GROUP BY gu.ID\n"
+                + "ORDER BY gu.ID, PURCHASE_COUNT DESC, TOTAL_PRICE DESC";
+    }
 }

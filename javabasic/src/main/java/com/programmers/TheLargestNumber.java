@@ -1,7 +1,9 @@
 package com.programmers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import org.apache.logging.log4j.util.Strings;
 
 /**
  * https://programmers.co.kr/learn/courses/30/lessons/42746
@@ -17,34 +19,39 @@ import java.util.Comparator;
  * - 정답이 너무 클 수 있으니 문자열로 바꾸어 return 합니다.
  */
 public class TheLargestNumber {
+
     public static String solution(int[] numbers) {
         String answer = "";
-        String[] str = new String[numbers.length];
-
-        for(int i = 0;i < numbers.length; i++){
-            str[i] = String.valueOf(numbers[i]);
+        String[] strs = new String[numbers.length];
+        int i=0;
+        for(int n : numbers){
+            strs[i] = String.valueOf(n);
+            i++;
         }
-
-        Arrays.sort(str, new Comparator<String>() {
-            // 내림차순 정리
+        Arrays.sort(strs, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
                 return (o2+o1).compareTo(o1+o2);
             }
         });
 
+        StringBuffer sb = new StringBuffer();
+        for(String s : strs){
+            sb.append(s);
+        }
+
         // 0으로 시작하면 답은 0
-        if("0".equals(str[0])){
+        if("0".equals(strs[0])){
             return "0";
         }
 
-        return String.join("", str);
+        return sb.toString();
     }
 
 
     //[6, 10, 2]	"6210"
     public static void main(String[] args) {
-        int[] arr = {10, 3, 0};
+        int[] arr = {3, 30, 34, 5, 9};
         System.out.println(solution(arr));
     }
 }

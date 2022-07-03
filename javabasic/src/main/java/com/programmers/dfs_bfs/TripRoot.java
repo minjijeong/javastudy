@@ -56,19 +56,24 @@ public class TripRoot {
     public static String[] solution2(String[][] tickets){
         cities = new ArrayList<>();
         visited = new boolean[tickets.length];
+        // 기준 데이타, 방문 데이타, depth, 시작점, 방문한 도시 조합
         dfs(tickets, visited, 0, "ICN", "ICN");
         Collections.sort(cities);
         return Arrays.stream(cities.get(0).split(" ")).toArray(String[]::new);
     }
 
     private static void dfs(String[][] tickets, boolean[] visited, int idx, String s, String result) {
+        // depth = 전체 티켓 조회 했는지?
         if(idx == tickets.length){
             cities.add(result);
             return;
         }
+
         for(int j=0; j < tickets.length;j++){
+            // 방문 안한 티켓 && 이전 도착 공항 = 현재 출발공항 일치하면
             if(!visited[j] && tickets[j][0].equals(s)){
                 visited[j] = true;
+                // 다음 공항 비교
                 dfs(tickets, visited, idx+1, tickets[j][1], result+" "+tickets[j][1]);
                 visited[j] = false;
             }

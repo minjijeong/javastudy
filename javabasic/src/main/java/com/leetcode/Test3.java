@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * https://leetcode.com/problems/subarray-sums-divisible-by-k/
@@ -20,6 +22,8 @@ public class Test3 {
         int k=5;
         System.out.println(subarraysDivByK(nums, k));
     }
+
+    @Transactional
     public static int subarraysDivByK(int[] nums, int k) {
         int answer = 0;
         int n = nums.length;

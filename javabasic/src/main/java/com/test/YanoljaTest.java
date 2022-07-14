@@ -6,15 +6,14 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeSet;
 import util.TestTimeUtils;
 
 public class YanoljaTest {
     public static void main(String[] args){
 //        test01();
 //        test02();
-        test03();
-//        test04();
+//        test03();
+        test04();
     }
 
     public static void test01() {
@@ -27,52 +26,19 @@ public class YanoljaTest {
     }
 
     public static int solution1(int[] A) {
-        // write your code in Java SE 11
+        // 시간복잡도 O(nlogn) ~ O(n^2) (pivot으로 선택한 데이타를 기준으로 한곳에 쏠려있을때 최악!! )
+        // Dual-Pivot Quicksort : 삽입 정렬(Insertion Sort)와 Quick Sort를 합친 것
+        // 참고 : https://www.secmem.org/blog/2019/05/06/special-sorts-2/
         Arrays.sort(A);
         int length = 0;
-        for (int i = 1; i < A.length-1; i++) {
-            int value = A[i] - A[i-1];
+        // 잡았다 요놈 - 사용자 오류..버그
+        // for (int i = 1; i < A.length-1; i++) {
+        for (int i = 1; i < A.length; i++) {
+                int value = A[i] - A[i-1];
             length = Math.max(length, value);
         }
         return length / 2;
     }
-
-    public static int solution1_2(int[] A) {
-        // write your code in Java SE 11
-        Arrays.sort(A);
-        int min = A[0];
-        int max = A[A.length - 1];
-        int farLength = 0;
-        TreeSet treeSet = removeDuplication(A);
-        if(treeSet.size() <= 1) return 0;
-
-        for(int j = min; j < max; j++) {
-            int finalJ = j;
-            if(Arrays.stream(A).noneMatch(i -> i == finalJ)) {
-                int nearLength = 0;
-                for(int k = 1; k < max - min; k++){
-                    int left = finalJ - k;
-                    int right = finalJ + k;
-                    if(Arrays.stream(A).noneMatch(i -> i == left) && Arrays.stream(A).noneMatch(i -> i == right)) {
-                        nearLength++;
-                    } else {
-                        break;
-                    }
-                }
-                if(nearLength > farLength) farLength = nearLength;
-            }
-        }
-        return farLength+1;
-    }
-
-    public static TreeSet removeDuplication(int[] inputArray) {
-        TreeSet t = new TreeSet();
-        for(int i=0; i< inputArray.length; i++) {
-            t.add(inputArray[i]);
-        }
-        return t;
-    }
-
 
     private static void test02() {
 //        int[] block = {2,6,8,5}; //3
@@ -105,6 +71,7 @@ public class YanoljaTest {
         // 0.0
     }
     public static int solution2_orgin(int[] blocks) {
+        // 시간복잡도 N^2
         int distance = 0;
         for(int i=0;i<blocks.length;i++){
             int nextX = i;
@@ -148,7 +115,7 @@ public class YanoljaTest {
             while(nextY < blocks.length -1){
                 // can't move to right
                 if(blocks[nextY] > blocks[nextY+1]){
-                    i = nextY;
+                    i = nextY; // 골짜기 정상으로 이동 - 복잡도를 조금 줄일수 잇음
                     break;
                 }
                 nextY++;
@@ -235,6 +202,11 @@ public class YanoljaTest {
             int denominator = Y[i] /gcd(X[i],Y[i]);
 
             String key = String.format("%s/%s",numerator, denominator);
+            // String을 HashMap으로 조회하면 2,/,3 이런형태이기 때문에 조금 더 오래 걸릴수 있다.
+            // 이부분을 개선하는 방향 생각해보자
+            // get하는 부분때문에 시간복잡도 올라갈수 있다.
+            // 해시는 10개 이상의 데이타인 경우 연결리스트를 타서 조회가 순차적으로만 접근 가능해서 느릴수 있다.
+            // String 형태가 아니라 Pair 클래스 선언해서 처리하면 어떨지 확인 해보자
             fractionMap.put(key, fractionMap.getOrDefault(key,0)+1);
         }
         for(int val : fractionMap.values()){
@@ -273,6 +245,14 @@ public class YanoljaTest {
         for (Integer integer : map.values()) {
             reverseWeight.add(integer);
         }
+        /**
+         * Merge Sort or Tim Sort(Insertion Sort + Merge Sort) 활용 👉 O(nlogn)
+         * 참고 : https://da-nyee.github.io/posts/java-arrays-sort-vs-collections-sort/
+         * if (LegacyMergeSort.userRequested)
+         *    legacyMergeSort(a, c);
+         * else
+         *    TimSort.sort(a, 0, a.length, c, null, 0, 0);
+         */
         reverseWeight.sort(Comparator.reverseOrder());
 
         // order large number of edges

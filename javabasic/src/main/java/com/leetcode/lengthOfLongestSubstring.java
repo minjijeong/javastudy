@@ -8,26 +8,21 @@ public class lengthOfLongestSubstring {
         System.out.println(lengthOfLongestSubstring(s));
     }
     public static int lengthOfLongestSubstring(String s) {
-        Set<String> list = new HashSet<>();
-        int answer = 0;
-        for(int i=0;i<s.length();i++){
-            int size= 1;
-            int next = i+size;
-            StringBuffer now = new StringBuffer(s.substring(i, next));
+        int answer = s.length() == 0 ? 0 : 1, front = 0;
+        Map<Character, Integer> map = new HashMap<>();
 
-            while(next+size <= s.length()){
-                String nextOne = s.substring(next, next+size);
-                if(!now.toString().equals(nextOne)){
-                    now.append(s.substring(next,next+1));
-                    size++;
-                    next = i+size;
-                }
-                else{
-                    break;
-                }
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            if (map.containsKey(c) && map.get(c) >= front) {
+                answer = Math.max(i - front, answer);
+                front = map.get(c) + 1;
             }
-            answer = Math.max(answer, now.length());
+
+            map.put(c, i);
         }
+        answer = Math.max(s.length() - front, answer);
+
         return answer;
     }
 }

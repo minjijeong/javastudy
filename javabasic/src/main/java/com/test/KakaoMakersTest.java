@@ -69,15 +69,11 @@ public class KakaoMakersTest {
             int std2 = students2.get(i);
 
             if (queryType.get(i).equals("Friend")) {
-                List<Integer> edge = map.get(std1);
-                List<Integer> combine = map.get(std1);
-                if(!combine.contains(std2)) combine.add(std2);
-                if(!combine.contains(std1)) combine.add(std1);
-                for(int num : map.get(std2)){
-                    if(!combine.contains(num)) combine.add(num);
-                }
+                // Set으로 변경
+                Set<Integer> combine = new LinkedHashSet<>(map.get(std1));
+                combine.addAll(map.get(std2));
                 for(int num : combine){
-                    map.replace(num, combine);
+                    map.replace(num, combine.stream().collect(Collectors.toList()));
                 }
             } else {
                 Set<Integer> set = new LinkedHashSet<>(map.get(std1));

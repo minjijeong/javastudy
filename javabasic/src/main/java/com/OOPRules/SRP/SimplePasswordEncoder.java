@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SimplePasswordEncoder {
-    public String encrytPassword(final String pw){
+    public String encryptPassword(final String pw){
         final StringBuilder sb = new StringBuilder();
 
         for(byte b : pw.getBytes(StandardCharsets.UTF_8)){

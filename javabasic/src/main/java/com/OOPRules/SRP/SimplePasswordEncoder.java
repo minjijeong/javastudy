@@ -4,7 +4,9 @@ import java.nio.charset.StandardCharsets;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SimplePasswordEncoder {
+public class SimplePasswordEncoder implements PasswordEncoder{
+
+    @Override
     public String encryptPassword(final String pw){
         final StringBuilder sb = new StringBuilder();
 

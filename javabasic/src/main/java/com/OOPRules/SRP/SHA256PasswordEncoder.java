@@ -6,9 +6,10 @@ import java.security.NoSuchAlgorithmException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SHA256PasswordEncoder {
+public class SHA256PasswordEncoder implements PasswordEncoder{
     private final static String SHA_256 = "SHA-256";
 
+    @Override
     public String encryptPassword(final String pw){
         final MessageDigest digest;
         try {

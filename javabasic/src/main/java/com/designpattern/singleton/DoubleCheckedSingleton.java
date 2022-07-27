@@ -1,8 +1,9 @@
-package com.designpattern;
+package com.designpattern.singleton;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class DoubleCheckedSingleton {
+public class DoubleCheckedSingleton implements Serializable {
     private static volatile DoubleCheckedSingleton instance = null;
     /**
      * ** 메인메모리와 스레드의 Working 메모리 간에 데이터의 이동이 있기 때문에

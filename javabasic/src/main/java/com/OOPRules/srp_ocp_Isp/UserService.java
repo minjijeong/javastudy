@@ -1,4 +1,4 @@
-package com.OOPRules.SRP;
+package com.OOPRules.srp_ocp_Isp;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +13,13 @@ public class UserService {
      */
     private final PasswordEncoder passwordEncoder;
     private final PasswordChecker passwordChecker;
+
+//    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
+//                       PasswordChecker passwordChecker) {
+//        this.userRepository = userRepository;
+//        this.passwordEncoder = passwordEncoder;
+//        this.passwordChecker = passwordChecker;
+//    }
 
     public void addUser(final String email, final String pw) {
         // 비밀번호 암호화 처리 분리

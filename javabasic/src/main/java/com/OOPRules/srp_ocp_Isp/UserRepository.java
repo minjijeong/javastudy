@@ -1,4 +1,4 @@
-package com.OOPRules.SRP;
+package com.OOPRules.srp_ocp_Isp;
 
 import org.springframework.stereotype.Repository;
 

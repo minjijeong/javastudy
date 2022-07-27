@@ -4,7 +4,7 @@ import java.nio.charset.StandardCharsets;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SimplePasswordEncoder implements PasswordEncoder{
+public class SimplePasswordEncoder implements PasswordEncoder, PasswordChecker{
 
     @Override
     public String encryptPassword(final String pw){
@@ -15,5 +15,11 @@ public class SimplePasswordEncoder implements PasswordEncoder{
         }
 
         return sb.toString();
+    }
+
+    @Override
+    public boolean isCorrectPassword(String rawPw, String pw) {
+        final String encryptedPw = encryptPassword(rawPw);
+        return encryptedPw.equals(pw);
     }
 }

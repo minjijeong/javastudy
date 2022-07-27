@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SHA256PasswordEncoder implements PasswordEncoder{
+public class SHA256PasswordEncoder implements PasswordEncoder, PasswordChecker{
     private final static String SHA_256 = "SHA-256";
 
     @Override
@@ -35,10 +35,9 @@ public class SHA256PasswordEncoder implements PasswordEncoder{
         return hexString.toString();
     }
 
-    /**
-     * 이전 패스워드와 동일한지 비교
-     */
-    private boolean isCorrectPassword(final String rawPw, final String pw){
+
+    @Override
+    public boolean isCorrectPassword(final String rawPw, final String pw){
         final String encryptedPw = encryptPassword(rawPw);
         return encryptedPw.equals(pw);
     }

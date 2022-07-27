@@ -1,17 +1,14 @@
 package com.designpattern.factorymethod;
 
-/**
- *
- */
 public class Client {
     public static void main(String[] args){
         Client client = new Client();
+        // print에 주입되는 ShipFactory 구현체에 따라 적용된다.
+        client.print(new WhiteShipFactory(), "WhiteShip", "keesun@mail.com");
+        client.print(new BlackShipFactory(), "WhiteShip", "keesun@mail.com");
+    }
 
-        Ship whiteShip = new WhiteShipFactory().orderShip("WhiteShip", "keesun@gamil.com");
-        System.out.println(whiteShip);
-
-        Ship blackShip = new BlackShipFactory().orderShip("blackShip", "keesun@gmail.com");
-        System.out.println(blackShip);
-
+    private void print(ShipFactory shipFactory, String name, String email){
+        System.out.println(shipFactory.orderShip(name, email));
     }
 }

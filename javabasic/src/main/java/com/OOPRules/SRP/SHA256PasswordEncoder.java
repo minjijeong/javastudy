@@ -34,4 +34,12 @@ public class SHA256PasswordEncoder implements PasswordEncoder{
         }
         return hexString.toString();
     }
+
+    /**
+     * 이전 패스워드와 동일한지 비교
+     */
+    private boolean isCorrectPassword(final String rawPw, final String pw){
+        final String encryptedPw = encryptPassword(rawPw);
+        return encryptedPw.equals(pw);
+    }
 }

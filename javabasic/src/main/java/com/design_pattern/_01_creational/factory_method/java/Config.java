@@ -1,6 +1,6 @@
-package com.design_pattern.factory_method.java;
+package com.design_pattern._01_creational.factory_method.java;
 
-import com.design_pattern.factory_method.WhiteShip;
+import com.design_pattern._01_creational.factory_method.WhiteShip;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

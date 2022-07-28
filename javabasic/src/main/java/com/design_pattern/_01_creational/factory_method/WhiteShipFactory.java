@@ -1,4 +1,4 @@
-package com.design_pattern.factory_method;
+package com.design_pattern._01_creational.factory_method;
 
 public class WhiteShipFactory implements ShipFactory{
     @Override

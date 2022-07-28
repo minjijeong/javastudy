@@ -1,4 +1,4 @@
-package com.design_pattern.singleton;
+package com.design_pattern._01_creational.singleton;
 
 public class StaticInnerSingleton {
     private StaticInnerSingleton(){}

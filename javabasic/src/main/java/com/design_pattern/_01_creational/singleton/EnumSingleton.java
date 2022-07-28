@@ -1,4 +1,4 @@
-package com.design_pattern.singleton;
+package com.design_pattern._01_creational.singleton;
 
 /**
  * Enum으로 싱글톤 구현시,

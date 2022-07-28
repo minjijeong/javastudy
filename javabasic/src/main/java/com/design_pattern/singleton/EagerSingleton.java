@@ -1,6 +1,4 @@
-package com.designpattern.singleton;
-
-import org.omg.CORBA.BAD_CONTEXT;
+package com.design_pattern.singleton;
 
 /**
  * 클라이언트에서 사용하지 않더라도 인스턴스는 항상 생성된다는 것이 단점이다.

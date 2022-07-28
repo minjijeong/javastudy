@@ -1,4 +1,4 @@
-package com.designpattern.singleton;
+package com.design_pattern.singleton;
 
 import java.io.IOException;
 

@@ -1,6 +1,4 @@
-package com.designpattern.factorymethod;
-
-import org.springframework.beans.factory.annotation.Autowired;
+package com.design_pattern.factory_method;
 
 public class WhiteShipFactory implements ShipFactory{
     @Override

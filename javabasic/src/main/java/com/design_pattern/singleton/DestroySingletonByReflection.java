@@ -1,6 +1,5 @@
-package com.designpattern.singleton;
+package com.design_pattern.singleton;
 
-import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 

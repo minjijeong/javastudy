@@ -1,7 +1,7 @@
-package com.designpattern.factorymethod.java;
+package com.design_pattern.factory_method.java;
 
-import com.designpattern.factorymethod.BlackShip;
-import com.designpattern.factorymethod.WhiteShip;
+import com.design_pattern.factory_method.BlackShip;
+import com.design_pattern.factory_method.WhiteShip;
 
 public class SimpleFactory {
     public Object createProduct(String name){

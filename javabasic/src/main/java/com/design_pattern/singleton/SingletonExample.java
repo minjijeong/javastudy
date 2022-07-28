@@ -1,4 +1,4 @@
-package com.designpattern.singleton;
+package com.design_pattern.singleton;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

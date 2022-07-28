@@ -1,4 +1,4 @@
-package com.designpattern.singleton;
+package com.design_pattern.singleton;
 
 /**
  * - 생성자를 private로 만든 이유?

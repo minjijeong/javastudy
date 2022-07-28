@@ -1,9 +1,8 @@
-package com.designpattern.factorymethod.java;
+package com.design_pattern.factory_method.java;
 
-import com.designpattern.factorymethod.WhiteShip;
+import com.design_pattern.factory_method.WhiteShip;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class SpringBeanFactoryExample {

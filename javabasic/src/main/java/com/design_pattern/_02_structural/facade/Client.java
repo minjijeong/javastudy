@@ -1,11 +1,5 @@
 package com.design_pattern._02_structural.facade;
 
-import java.util.Properties;
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
-
 public class Client {
     public static void main(String[] args) {
         String from = "test@kakao.com";
@@ -13,22 +7,20 @@ public class Client {
         String host = "smtp.kakao.com";
         String port = "465";
 
-        Properties properties = System.getProperties();
-        properties.setProperty("mail.smtp.host", host);
-        properties.setProperty("mail.smtp.port", port);
+        // 이메일 세팅
+        EmailSettings emailSettings = new EmailSettings();
+        emailSettings.setHost(host);
+        emailSettings.setPort(port);
 
-        Session session = Session.getDefaultInstance(properties);
+        EmailSender emailSender = new EmailSender(emailSettings);
 
-        MimeMessage message = new MimeMessage(session);
-        try {
-            message.setFrom(new InternetAddress(from));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.setSubject("Test Mail from Java Program");
-            message.setText("message");
-
-            Transport.send(message);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
+        // 이메일 내용 세팅
+        EmailMessage emailMessage = new EmailMessage();
+        emailMessage.setFrom(from);
+        emailMessage.setTo(to);
+        emailMessage.setSubject("Test Mail from Java Program");
+        emailMessage.setText("이메일 입니다!!! \n");
+        // 이메일 전송
+        emailSender.sendEmail(emailMessage);
     }
 }

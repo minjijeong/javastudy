@@ -31,13 +31,14 @@ public class DecoratorInJava {
         // 부가적인 기능을 추가해서 변환해주는 메소드
         // checked~ 타입을 확인하여 반환
         List books = Collections.checkedList(list, Book.class);
-        list.add(new Item());
-        // checkedList로 생성되어,
         books.add(new Book());
+        // checkedList로 생성되어, Book 외의 타입을 받을 수 없도록 세팅
+        // books.add(new Item()); // 오류발생
 
         List unmodifiableList = Collections.unmodifiableList(list);
-        list.add(new Item());
-        unmodifiableList.add(new Book());
+        // unmodifiableList 리스트는 더이상 변경이 어렵기 때문에 추가하는 것도 오류가 난다.
+        // unmodifiableList.add(new Item()); // 오류발생
+        // unmodifiableList.add(new Book()); // 오류발생
 
 
         // Collections.synchronized*()

@@ -6,21 +6,28 @@ import java.util.List;
 import java.util.Map;
 
 public class ChatServer {
-    private Map<String, List<String>> messages;
+    private Map<String, List<Subscriber>> subscribers = new HashMap<>();
 
-    public ChatServer(){
-        this.messages = new HashMap<>();
-    }
-
-    public void add(String subject, String message){
-        if(messages.containsKey(subject)){
-            messages.get(subject).add(message);
+    public void register(String subject, Subscriber subscriber){
+        if(subscribers.containsKey(subject)){
+            subscribers.get(subject).add(subscriber);
         }else{
-            List<String> messageList = new ArrayList<>();
-            messageList.add(message);
-            messages.put(subject, messageList);
+            List<Subscriber> list = new ArrayList<>();
+            list.add(subscriber);
+            this.subscribers.put(subject,list);
         }
     }
 
-    public List<String> getMessage(String subject){ return messages.get(subject);}
+    public void unregister(String subject, Subscriber subscriber){
+        if(subscribers.containsKey(subject)){
+            subscribers.get(subject).remove(subscriber);
+        }
+    }
+
+    public void sendMessage(User user, String subject, String message){
+        if(this.subscribers.containsKey(subject)){
+            String userMessage = user.getName() + " : " + message;
+            this.subscribers.get(subject).forEach(s-> s.handleMessage(userMessage));
+        }
+    }
 }

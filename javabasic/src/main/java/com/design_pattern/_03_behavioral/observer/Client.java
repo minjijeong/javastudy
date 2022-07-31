@@ -4,14 +4,14 @@ public class Client {
     public static void main(String[] args) {
         ChatServer chatServer = new ChatServer();
 
-        User user1 = new User(chatServer);
-        user1.sendMessage("디자인패턴","이번엔 옵저버 패턴입니다.");
-        user1.sendMessage("알고리즘", "자료구조부터 하세요!");
+        User user1 = new User("keesun");
+        User user2 = new User("whiteship");
 
-        User user2 = new User(chatServer);
-        System.out.println(user2.getMessage("디자인패턴"));
+        chatServer.register("디자인패턴", user1);
+        chatServer.register("디자인패턴", user2);
+        chatServer.register("오징어게임", user1);
 
-        user1.sendMessage("디자인패턴", "예제 코드 보는 중...");
-        System.out.println(user2.getMessage("디자인패턴"));
+        chatServer.sendMessage(user1, "디자인패턴", "예제 코드 보는 중...");
+        chatServer.sendMessage(user1,"오징어게임", "오징어 게임 그렇게 재밌나...?");
     }
 }

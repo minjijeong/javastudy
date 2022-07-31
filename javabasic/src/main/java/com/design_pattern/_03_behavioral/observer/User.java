@@ -1,18 +1,17 @@
 package com.design_pattern._03_behavioral.observer;
 
-import java.util.List;
-
-public class User {
-    private ChatServer chatServer;
-    public User(ChatServer chatServer){
-        this.chatServer = chatServer;
+public class User implements Subscriber{
+    private String name;
+    public User(String name){
+        this.name = name;
     }
 
-    public void sendMessage(String subject, String message){
-        chatServer.add(subject, message);
+    public String getName() {
+        return name;
     }
 
-    public List<String> getMessage(String subject){
-        return chatServer.getMessage(subject);
+    @Override
+    public void handleMessage(String message) {
+        System.out.println(message);
     }
 }

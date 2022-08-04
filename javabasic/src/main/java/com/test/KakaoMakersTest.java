@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class KakaoMakersTest {
     public static void main(String[] args){
 //        test01();
-        test02();
+//        test02();
         test03();
     }
 
@@ -30,18 +30,18 @@ public class KakaoMakersTest {
 //        int[] s1 = {1,2};
 //        int[] s2 = {2,3};
 //        int n = 5;
-//        String[] queries = {"Friend", "Friend","Total"};
-//        int[] s1 = {4,2,2};
-//        int[] s2 = {1,4,3};
-//        int n = 5;
+        String[] queries = {"Friend", "Friend","Total"};
+        int[] s1 = {4,2,2};
+        int[] s2 = {1,4,3};
+        int n = 5;
 //        String[] queries = {"Friend","Total", "Friend","Total", "Friend","Total", "Friend","Total", "Friend","Total"};
 //        int[] s1 = {2, 4, 9, 1, 4, 10, 7, 10, 8, 1};
 //        int[] s2 = {6, 1, 7, 8, 9, 9, 4, 7, 2, 6};
 //        int n = 10;
-        String[] queries = {"Friend","Total", "Friend","Total", "Friend","Total", "Friend","Total", "Friend","Total"};
-        int[] s1 = {9, 6, 7, 1, 8, 1, 2, 3, 2, 1};
-        int[] s2 = {2, 5, 2, 5, 2, 4, 1, 7, 4, 8};
-        int n = 10;
+//        String[] queries = {"Friend","Total", "Friend","Total", "Friend","Total", "Friend","Total", "Friend","Total"};
+//        int[] s1 = {9, 6, 7, 1, 8, 1, 2, 3, 2, 1};
+//        int[] s2 = {2, 5, 2, 5, 2, 4, 1, 7, 4, 8};
+//        int n = 10;
 
         List<Integer> s1List = new ArrayList<>();
         for (int i : s1) {
@@ -63,6 +63,7 @@ public class KakaoMakersTest {
             set.add(i);
             map.put(i,set);
         }
+        System.out.println(map.keySet());
 
         for(int i=0;i<queryType.size();i++) {
             int std1 = students1.get(i);

@@ -1,20 +1,11 @@
 package com.datastructure;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import sun.awt.image.ImageWatched.Link;
 
 /**
  * Stack :  LIFO (Last In First Out) 제일 늦게 들어간 놈이 제일 먼저 나온다.

@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * 5. 작업중에 생성된 리소스는 반환
  * 6. JDBC API가 만들어내는 예외를 잡아서 처리
  */
-public class UserDao {
+public abstract class UserDao {
     public void add(User user) throws ClassNotFoundException, SQLException {
         // 1. DB Connection
         Connection c = getConnection();
@@ -85,32 +85,6 @@ public class UserDao {
     }
 
 
-    private Connection getConnection() throws ClassNotFoundException, SQLException {
-        // 1. DB Connection
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/spring", "spring", "book");
-    }
-
-
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        UserDao dao = new UserDao();
-        User user = new User();
-        user.setId("백기선");
-        user.setName("whiteship");
-        user.setPassword("married");
-
-        dao.add(user);
-
-        System.out.println(user.getId() + " 등록 성공!");
-
-        User user2 = dao.get(user.getId());
-        System.out.println(user2.getName());
-        System.out.println(user2.getPassword());
-        System.out.println(user2.getId() + " 조회 성공!");
-
-        dao.delete(user.getId());
-        System.out.println(user.getId() + " 삭제 성공!");
-    }
-
+    public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 
 }

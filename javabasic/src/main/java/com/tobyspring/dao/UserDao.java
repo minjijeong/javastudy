@@ -18,9 +18,7 @@ import java.sql.SQLException;
 public class UserDao {
     public void add(User user) throws ClassNotFoundException, SQLException {
         // 1. DB Connection
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/spring", "spring", "book");
-
+        Connection c = getConnection();
 
         // 2. SQL을 담은 Statement 또는 PreparedStatement를 만든다.
         PreparedStatement ps = c.prepareStatement("insert into users(id, name, password) values(?,?,?)");
@@ -43,8 +41,7 @@ public class UserDao {
 
     public User get(String id) throws ClassNotFoundException, SQLException {
         // 1. DB Connection
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection c = DriverManager.getConnection("jdbc:mysql://localhost:3306/spring", "spring", "book");
+        Connection c = getConnection();
 
         // 2. SQL을 담은 Statement 또는 PreparedStatement를 만든다.
         PreparedStatement ps = c.prepareStatement("select * from users where id=?");
@@ -69,6 +66,32 @@ public class UserDao {
         return user;
     }
 
+    public void delete(String id) throws ClassNotFoundException, SQLException {
+        // 1. DB Connection
+        Connection c = getConnection();
+
+        // 2. SQL을 담은 Statement 또는 PreparedStatement를 만든다.
+        PreparedStatement ps = c.prepareStatement("delete from users where id=?");
+        ps.setString(1, id);
+
+        // 3. Statement 실행
+        ps.executeUpdate();
+
+        // 4. 작업중에 생성된 리소스는 반환
+        ps.close();
+        c.close();
+        // 6. JDBC API가 만들어내는 예외를 잡아서 처리
+        // 없음
+    }
+
+
+    private Connection getConnection() throws ClassNotFoundException, SQLException {
+        // 1. DB Connection
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/spring", "spring", "book");
+    }
+
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         UserDao dao = new UserDao();
         User user = new User();
@@ -83,7 +106,11 @@ public class UserDao {
         User user2 = dao.get(user.getId());
         System.out.println(user2.getName());
         System.out.println(user2.getPassword());
-
         System.out.println(user2.getId() + " 조회 성공!");
+
+        dao.delete(user.getId());
+        System.out.println(user.getId() + " 삭제 성공!");
     }
+
+
 }

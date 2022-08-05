@@ -15,10 +15,15 @@ import java.sql.SQLException;
  * 5. 작업중에 생성된 리소스는 반환
  * 6. JDBC API가 만들어내는 예외를 잡아서 처리
  */
-public abstract class UserDao {
+public class UserDao {
+
+    private ConnectionMaker connectionMaker;
+    public UserDao(ConnectionMaker connectionMaker){
+        this.connectionMaker = connectionMaker;
+    }
     public void add(User user) throws ClassNotFoundException, SQLException {
         // 1. DB Connection
-        Connection c = getConnection();
+        Connection c = connectionMaker.makeConnection();
 
         // 2. SQL을 담은 Statement 또는 PreparedStatement를 만든다.
         PreparedStatement ps = c.prepareStatement("insert into users(id, name, password) values(?,?,?)");
@@ -41,7 +46,7 @@ public abstract class UserDao {
 
     public User get(String id) throws ClassNotFoundException, SQLException {
         // 1. DB Connection
-        Connection c = getConnection();
+        Connection c = connectionMaker.makeConnection();
 
         // 2. SQL을 담은 Statement 또는 PreparedStatement를 만든다.
         PreparedStatement ps = c.prepareStatement("select * from users where id=?");
@@ -68,7 +73,7 @@ public abstract class UserDao {
 
     public void delete(String id) throws ClassNotFoundException, SQLException {
         // 1. DB Connection
-        Connection c = getConnection();
+        Connection c = connectionMaker.makeConnection();
 
         // 2. SQL을 담은 Statement 또는 PreparedStatement를 만든다.
         PreparedStatement ps = c.prepareStatement("delete from users where id=?");
@@ -83,8 +88,4 @@ public abstract class UserDao {
         // 6. JDBC API가 만들어내는 예외를 잡아서 처리
         // 없음
     }
-
-
-    public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
-
 }

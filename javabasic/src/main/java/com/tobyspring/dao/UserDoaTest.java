@@ -6,7 +6,7 @@ public class UserDoaTest {
 
     public static void main(String[] args) {
         UserDoaTest userDoaTest = new UserDoaTest();
-        UserDao dao = new UserDao(new DConnectionMaker());
+        UserDao dao = new UserDaoFactory().userDao();
         User user = new User();
         user.setId("D1");
         user.setName("D사멤버십");
